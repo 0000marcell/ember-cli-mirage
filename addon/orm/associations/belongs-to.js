@@ -3,15 +3,32 @@ import _assign from 'lodash/object/assign';
 import { capitalize, camelize, pluralize } from 'ember-cli-mirage/utils/inflector';
 import assert from 'ember-cli-mirage/assert';
 
+/**
+ * 
+ * The belongsTo association adds a fk to the owner of the association
+ * @class BelongsTo
+ * @extends Association
+ * @public
+*/
 class BelongsTo extends Association {
 
-  /*
-    The belongsTo association adds a fk to the owner of the association
-  */
+  /** 
+	* Returns an arrays with the owner`s camilized model and camilized key pointing 
+	* to the association
+	* @method getForeignKeyArray
+	* @public
+	* @return {String}
+	*/	
   getForeignKeyArray() {
     return [camelize(this.ownerModelName), `${camelize(this.key)}Id`];
   }
 
+	/**
+	* Returns camilized key poiting to the association
+	* @method getForeignKey
+	* @public 
+	* @return {string}
+	*/
   getForeignKey() {
     return `${camelize(this.key)}Id`;
   }
